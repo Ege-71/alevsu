@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Alevsu ❤️ Ege</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(circle at 20% 20%, #ffb6d5 0%, transparent 30%),
+        radial-gradient(circle at 80% 80%, #ff8fbd 0%, transparent 30%),
+        linear-gradient(135deg, #ff4f81, #ff7eb3, #ffc1d6);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Uçuşan kalpler */
+
+.hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    bottom: -60px;
+    font-size: 25px;
+
+    animation: fly 8s linear infinite;
+    opacity: 0;
+}
+
+@keyframes fly {
+
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* Ana kutu */
+
+.container {
+    width: 92%;
+    max-width: 520px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,0.18);
+
+    backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255,255,255,0.35);
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 15px 40px rgba(100,0,40,0.25);
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* Başlık */
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+
+/* Butonlar */
+
+button {
+    border: none;
+
+    background: white;
+
+    color: #e91e63;
+
+    padding: 14px 24px;
+
+    border-radius: 30px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin-top: 12px;
+
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+
+/* Quiz */
+
+#quiz,
+#result {
+    display: none;
+}
+
+.question-number {
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+.question {
+    font-size: 21px;
+
+    font-weight: bold;
+
+    line-height: 1.5;
+
+    margin: 20px 0;
+}
+
+
+/* Şıklar */
+
+.option {
+    display: block;
+
+    width: 100%;
+
+    margin: 10px 0;
+
+    background: rgba(255,255,255,0.95);
+
+    color: #d81b60;
+}
+
+.option:hover {
+    background: white;
+}
+
+
+/* Sonuç */
+
+.score {
+    font-size: 30px;
+
+    font-weight: bold;
+
+    margin: 20px 0;
+}
+
+.message {
+
+    background: rgba(255,255,255,0.18);
+
+    border-radius: 20px;
+
+    padding: 22px;
+
+    line-height: 1.8;
+
+    font-size: 18px;
+}
+
+
+/* Büyük kalp */
+
+.big-heart {
+
+    font-size: 50px;
+
+    animation: beat 1s infinite;
+}
+
+@keyframes beat {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+
+/* Müzik butonu */
+
+.music-button {
+
+    position: fixed;
+
+    top: 20px;
+    right: 20px;
+
+    z-index: 10;
+
+    width: 48px;
+    height: 48px;
+
+    padding: 0;
+
+    margin: 0;
+
+    border-radius: 50%;
+
+    font-size: 20px;
+
+    background: rgba(255,255,255,0.9);
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     MÜZİK
+========================= -->
+
+<audio id="loveMusic" loop>
+
+    <source src="silly-cat.mp3" type="audio/mpeg">
+
+</audio>
+
+
+<!-- Müzik aç/kapat -->
+
+<button
+    id="musicButton"
+    class="music-button"
+    onclick="toggleMusic()">
+
+    🔇
+
+</button>
+
+
+<!-- =========================
+     UÇUŞAN KALPLER
+========================= -->
+
+<div class="hearts">
+
+    <div class="heart"
+         style="left:5%; animation-delay:0s;">
+         ❤️
+    </div>
+
+    <div class="heart"
+         style="left:15%; animation-delay:2s;">
+         💕
+    </div>
+
+    <div class="heart"
+         style="left:30%; animation-delay:4s;">
+         💗
+    </div>
+
+    <div class="heart"
+         style="left:45%; animation-delay:1s;">
+         ❤️
+    </div>
+
+    <div class="heart"
+         style="left:60%; animation-delay:3s;">
+         💖
+    </div>
+
+    <div class="heart"
+         style="left:75%; animation-delay:5s;">
+         💕
+    </div>
+
+    <div class="heart"
+         style="left:90%; animation-delay:2s;">
+         ❤️
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ANA KUTU
+========================= -->
+
+<div class="container">
+
+
+    <!-- BAŞLANGIÇ -->
+
+    <div id="start">
+
+        <div class="big-heart">
+            ❤️
+        </div>
+
+
+        <h1>
+            Alevsu ❤️ Ege
+        </h1>
+
+
+        <p class="subtitle">
+
+            Bu küçük test dünyanın en güzel insanı
+            <b>Alevsu</b> için hazırlandı. 🥹
+
+        </p>
+
+
+        <p class="subtitle">
+
+            Bakalım Alevsu... 😏
+
+            <br>
+
+            Ege'yi ne kadar iyi tanıyorsun?
+
+        </p>
+
+
+        <button onclick="startQuiz()">
+
+            Teste Başla 💗
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =========================
+         QUIZ
+    ========================= -->
+
+    <div id="quiz">
+
+        <p
+            class="question-number"
+            id="questionNumber">
+        </p>
+
+
+        <div
+            class="question"
+            id="question">
+        </div>
+
+
+        <div id="options"></div>
+
+    </div>
+
+
+
+    <!-- =========================
+         SONUÇ
+    ========================= -->
+
+    <div id="result">
+
+        <div class="big-heart">
+            ❤️
+        </div>
+
+
+        <h1>
+            Test Bitti! 🎉
+        </h1>
+
+
+        <div
+            class="score"
+            id="score">
+        </div>
+
+
+        <div class="message">
+
+            <p>
+                <b>Alevsu ❤️</b>
+            </p>
+
+
+            <p>
+
+                Hayatımda olduğun için çok şanslıyım
+
+                <br>
+
+                iyi ki varsın bitanem ❤️❤️❤️
+
+            </p>
+
+
+            <p>
+
+                <b>— Ege ❤️</b>
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =========================
+   SORULAR
+========================= */
+
+const questions = [
+
+    /* 1 */
+
+    {
+        q: "Ege ile Alevsu ilk nerede tanıştı? 👀",
+
+        options: [
+            "Manisa Kentpark'ın önünde ❤️",
+            "Bir kafede ☕",
+            "Okulda 📚",
+            "Bir konserde 🎵"
+        ],
+
+        answer: 0
+    },
+
+
+    /* 2 */
+
+    {
+        q: "İlk buluşmamızın konsepti neydi? ☕💕",
+
+        options: [
+            "Sinema date 🎬",
+            "Kahve date ☕❤️",
+            "Yemek date 🍕",
+            "Parkta yürüyüş 🌳"
+        ],
+
+        answer: 1
+    },
+
+
+    /* 3 */
+
+    {
+        q: "Ege'nin en sevdiği yemek hangisi? 🍣",
+
+        options: [
+            "Pizza 🍕",
+            "Hamburger 🍔",
+            "Sushi 🍣",
+            "Mantı 🥟"
+        ],
+
+        answer: 2
+    },
+
+
+    /* 4 */
+
+    {
+        q: "Alevsu'nun en sevdiği şey nedir? 😏❤️",
+
+        options: [
+            "Uyumak 😴",
+            "Ege ❤️",
+            "Kitap okumak 📖",
+            "Gezmek 🌎"
+        ],
+
+        answer: 1
+    },
+
+
+    /* 5 */
+
+    {
+        q: "Ege'nin Alevsu'da en sevdiği şey nedir? 🥹",
+
+        options: [
+            "Gülüşü 😊",
+            "Gözleri 👀",
+            "Sevme şekli ❤️",
+            "Saçları 😍"
+        ],
+
+        answer: 2
+    },
+
+
+    /* 6 */
+
+    {
+        q: "Birlikte yaptığımız komik şeylerden biri neydi? 😂",
+
+        options: [
+            "Yağmura yakalanıp koşmak 🌧️🏃",
+            "Birlikte yemek yapmak 🍳",
+            "Kaybolmak 🗺️",
+            "Film izlerken uyuyakalmak 😴"
+        ],
+
+        answer: 0
+    },
+
+
+    /* 7 */
+
+    {
+        q: "Alevsu'nun Ege'de en sevdiği şey nedir? 🥰",
+
+        options: [
+            "Kasları ve sevgisi ❤️",
+            "Esprileri 😂",
+            "Yemek yapması 🍳",
+            "Dans etmesi 💃"
+        ],
+
+        answer: 0
+    },
+
+
+    /* 8 */
+
+    {
+        q: "Birlikte gitmek istediğimiz o özel yer hangisi? 👀❤️",
+
+        options: [
+            "Paris 🇫🇷",
+            "Deniz kenarı 🌊",
+            "Dört duvar arasında bir yer 😏❤️",
+            "Japonya 🇯🇵"
+        ],
+
+        answer: 2
+    },
+
+
+    /* 9 */
+
+    {
+        q: "Aşk hikâyemizin başlangıç tarihi ne? 💕",
+
+        options: [
+            "14 Şubat 2026",
+            "1 Ocak 2026",
+            "28 Ocak 2026 ❤️",
+            "29 Şubat 2026"
+        ],
+
+        answer: 2
+    },
+
+
+    /* 10 */
+
+    {
+        q: "Alevsu ile Ege arasında kim daha çok trip atar? 😂",
+
+        options: [
+            "Alevsu 😏",
+            "Ege 😂",
+            "İkisi eşit",
+            "Hiçbiri 😇"
+        ],
+
+        answer: 0
+    },
+
+
+    /* 11 */
+
+    {
+        q: "Hanginiz daha kıskanç? 👀",
+
+        options: [
+            "Alevsu ❤️",
+            "Ege 😏",
+            "İkisi de",
+            "Kıskançlık yok 😇"
+        ],
+
+        answer: 1
+    },
+
+
+    /* 12 */
+
+    {
+        q: "Hanginiz daha çabuk barışır? ❤️",
+
+        options: [
+            "Alevsu",
+            "Ege ❤️",
+            "İkiniz de aynı",
+            "Duruma göre"
+        ],
+
+        answer: 1
+    },
+
+
+    /* 13 */
+
+    {
+        q: "Ege, Alevsu'yu üzünce ne yapar? 🥹",
+
+        options: [
+            "Gönlünü almaya çalışır",
+            "Özür diler",
+            "Sarılır",
+            "Hepsini yapar ❤️"
+        ],
+
+        answer: 3
+    },
+
+
+    /* 14 */
+
+    {
+        q: "Alevsu üzgün olduğunda Ege ne yapmak ister? 🫂",
+
+        options: [
+            "Sarılmak",
+            "Yanında olmak",
+            "Güldürmek",
+            "Hepsi ❤️"
+        ],
+
+        answer: 3
+    },
+
+
+    /* 15 */
+
+    {
+        q: "Yağmur yağdığında akla gelen anınız hangisi? 🌧️",
+
+        options: [
+            "Şemsiye altında cips yemek 🌧️🍟",
+            "Kahve içmek ☕",
+            "Film izlemek 🎬",
+            "Evde kalmak 🏠"
+        ],
+
+        answer: 0
+    },
+
+
+    /* 16 */
+
+    {
+        q: "İlk buluşmada ne yaptınız? ☕",
+
+        options: [
+            "Sinema 🎬",
+            "Yemek 🍕",
+            "Yürüyüş 🌳",
+            "Kahve date ☕❤️"
+        ],
+
+        answer: 3
+    },
+
+
+    /* 17 */
+
+    {
+        q: "Ege'nin Alevsu'ya karşı en belirgin özelliği nedir? ❤️",
+
+        options: [
+            "Sevgisi",
+            "Sabırlı olması",
+            "Alttan alması",
+            "Hepsi ❤️"
+        ],
+
+        answer: 3
+    },
+
+
+    /* 18 */
+
+    {
+        q: "Alevsu'nun Ege'de en sevdiği şeylerden biri nedir? 🥰",
+
+        options: [
+            "Düşünceli oluşu ❤️",
+            "Gülüşü 😊",
+            "Saçları 😍",
+            "Esprileri 😂"
+        ],
+
+        answer: 0
+    },
+
+
+    /* 19 */
+
+    {
+        q: "Ege, Alevsu'yu görünce içinden geçen en muhtemel şey nedir? 😍",
+
+        options: [
+            "\"Çok güzel.\"",
+            "\"İyi ki benim.\"",
+            "\"Seni seviyorum.\"",
+            "Hepsi ❤️"
+        ],
+
+        answer: 3
+    },
+
+
+    /* 20 */
+
+    {
+        q: "Birlikte en çok ne yapmak isterdiniz? 🥹",
+
+        options: [
+            "Sarılmak 🫂",
+            "Gezmek 🌎",
+            "Baş başa kalmak ❤️",
+            "Hepsi ❤️"
+        ],
+
+        answer: 3
+    },
+
+
+    /* 21 */
+
+    {
+        q: "Alevsu ile Ege'nin ideal günü nasıl olur? 💕",
+
+        options: [
+            "Beraber gezmek",
+            "Kahve içmek",
+            "Baş başa kalmak ❤️",
+            "Hepsi"
+        ],
+
+        answer: 2
+    },
+
+
+    /* 22 */
+
+    {
+        q: "Ege'nin Alevsu'ya söylemesi en muhtemel söz hangisi? ❤️",
+
+        options: [
+            "\"Bitanem\"",
+            "\"Seni seviyorum\"",
+            "\"İyi ki varsın\"",
+            "Hepsi ❤️"
+        ],
+
+        answer: 3
+    },
+
+
+    /* 23 */
+
+    {
+        q: "Alevsu ile Ege'nin ilişkisinde en önemli şey nedir? 💗",
+
+        options: [
+            "Sevgi",
+            "Güven",
+            "Eğlence",
+            "Hepsi ❤️"
+        ],
+
+        answer: 3
+    },
+
+
+    /* 24 */
+
+    {
+        q: "Ege ve Alevsu tartışınca sonunda ne olur? 😂❤️",
+
+        options: [
+            "Barışırlar ❤️",
+            "Sarılırlar",
+            "Konuşup çözerler",
+            "Bir süre konuşmazlar"
+        ],
+
+        answer: 0
+    },
+
+
+    /* 25 */
+
+    {
+        q: "Alevsu Ege için ne ifade ediyor? 🥹",
+
+        options: [
+            "Sevgilim ❤️",
+            "Hayatımın önemli bir parçası",
+            "Dünyam",
+            "Hepsi ❤️"
+        ],
+
+        answer: 3
+    },
+
+
+    /* 26 */
+
+    {
+        q: "Ege ve Alevsu gelecekte ne yapmak ister? 🌎",
+
+        options: [
+            "Birlikte gezmek",
+            "Birlikte yaşamak",
+            "Birlikte güzel anılar biriktirmek",
+            "Hepsi ❤️"
+        ],
+
+        answer: 3
+    },
+
+
+    /* 27 */
+
+    {
+        q: "Ege'nin Alevsu'yu sevmesinin nedeni nedir? ❤️",
+
+        options: [
+            "Beni sevme şekli",
+            "Bana hissettirdikleri",
+            "Onun olması",
+            "Sadece seviyor ❤️"
+        ],
+
+        answer: 3
+    },
+
+
+    /* 28 */
+
+    {
+        q: "Alevsu ve Ege'nin aşkını en iyi hangi emoji anlatır? 😏",
+
+        options: [
+            "❤️",
+            "💕",
+            "🥹",
+            "❤️❤️❤️"
+        ],
+
+        answer: 3
+    },
+
+
+    /* 29 */
+
+    {
+        q: "Ege'nin Alevsu'ya verebileceği en güzel cevap hangisi? 🥹",
+
+        options: [
+            "\"İyi ki varsın.\"",
+            "\"Seni çok seviyorum.\" ❤️",
+            "\"Hayatımda olduğun için çok şanslıyım.\"",
+            "\"Her şeyimsin.\""
+        ],
+
+        answer: 1
+    },
+
+
+    /* 30 - FİNAL */
+
+    {
+        q: "Son soru... Ege Alevsu'yu ne kadar seviyor? 🥹❤️",
+
+        options: [
+            "Biraz 😌",
+            "Çok ❤️",
+            "Çok ama çok ❤️❤️",
+            "Tarifi yok... ❤️❤️❤️"
+        ],
+
+        answer: 3
+    }
+
+];
+
+
+/* =========================
+   QUIZ SİSTEMİ
+========================= */
+
+let current = 0;
+
+let score = 0;
+
+
+/* Quiz başlat */
+
+function startQuiz() {
+
+    document.getElementById("start").style.display =
+        "none";
+
+    document.getElementById("quiz").style.display =
+        "block";
+
+
+    /* Müziği başlat */
+
+    const music =
+        document.getElementById("loveMusic");
+
+
+    music.volume = 0.9;
+
+
+    music.play().then(() => {
+
+        document.getElementById("musicButton")
+            .innerText = "🔊";
+
+    }).catch(() => {
+
+        document.getElementById("musicButton")
+            .innerText = "🔇";
+
+    });
+
+
+    showQuestion();
+}
+
+
+/* Soru göster */
+
+function showQuestion() {
+
+    const q = questions[current];
+
+
+    document.getElementById("questionNumber")
+        .innerText =
+        `${current + 1} / ${questions.length}`;
+
+
+    document.getElementById("question")
+        .innerText =
+        q.q;
+
+
+    const options =
+        document.getElementById("options");
+
+
+    options.innerHTML = "";
+
+
+    q.options.forEach((option, index) => {
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "option";
+
+
+        button.innerText =
+            option;
+
+
+        button.onclick = function() {
+
+
+            if (index === q.answer) {
+
+                score++;
+
+            }
+
+
+            current++;
+
+
+            if (current < questions.length) {
+
+                showQuestion();
+
+            }
+
+            else {
+
+                showResult();
+
+            }
+
+        };
+
+
+        options.appendChild(button);
+
+    });
+
+}
+
+
+/* Sonuç */
+
+function showResult() {
+
+    document.getElementById("quiz")
+        .style.display = "none";
+
+
+    document.getElementById("result")
+        .style.display = "block";
+
+
+    document.getElementById("score")
+        .innerText =
+        `${score} / ${questions.length} ❤️`;
+
+}
+
+
+/* =========================
+   MÜZİK AÇ / KAPAT
+========================= */
+
+function toggleMusic() {
+
+    const music =
+        document.getElementById("loveMusic");
+
+
+    const button =
+        document.getElementById("musicButton");
+
+
+    if (music.paused) {
+
+        music.play();
+
+        music.volume = 0.25;
+
+        button.innerText = "🔊";
+
+    }
+
+    else {
+
+        music.pause();
+
+        button.innerText = "🔇";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
